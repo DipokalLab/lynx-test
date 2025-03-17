@@ -1,45 +1,41 @@
-import { useCallback, useEffect, useState } from '@lynx-js/react'
+import { useCallback, useEffect, useState } from "@lynx-js/react";
 
-import './App.css'
-import arrow from './assets/arrow.png'
-import lynxLogo from './assets/lynx-logo.png'
-import reactLynxLogo from './assets/react-logo.png'
+import "./App.css";
 
 export function App() {
-  const [alterLogo, setAlterLogo] = useState(false)
+  const [alterLogo, setAlterLogo] = useState(false);
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
-    console.info('Hello, ReactLynx')
-  }, [])
+    console.info("Hello, ReactLynx");
+  }, []);
 
   const onTap = useCallback(() => {
-    'background only'
-    setAlterLogo(!alterLogo)
-  }, [alterLogo])
+    "background only";
+    setAlterLogo(!alterLogo);
+  }, [alterLogo]);
+
+  const handleClick = () => {
+    setCount((c) => c + 1);
+  };
 
   return (
     <view>
-      <view className='Background' />
-      <view className='App'>
-        <view className='Banner'>
-          <view className='Logo' bindtap={onTap}>
-            {alterLogo
-              ? <image src={reactLynxLogo} className='Logo--react' />
-              : <image src={lynxLogo} className='Logo--lynx' />}
+      <view className="App">
+        <view
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "1rem",
+          }}
+        >
+          {/* <text className="Title">Test</text> */}
+          <view className="Button" bindtap={handleClick}>
+            <text className="ButtonTitle">{count} Button</text>
           </view>
-          <text className='Title'>React</text>
-          <text className='Subtitle'>on Lynx</text>
         </view>
-        <view className='Content'>
-          <image src={arrow} className='Arrow' />
-          <text className='Description'>Tap the logo and have fun!</text>
-          <text className='Hint'>
-            Edit<text style={{ fontStyle: 'italic' }}>{' src/App.tsx '}</text>
-            to see updates!
-          </text>
-        </view>
-        <view style={{ flex: 1 }}></view>
       </view>
     </view>
-  )
+  );
 }
